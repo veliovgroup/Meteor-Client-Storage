@@ -7,6 +7,26 @@ Tinytest.add('Meteor.storage: set() / get()', function (test) {
   Meteor.storage.empty();
 });
 
+Tinytest.add('Meteor.storage: set() / get() object and array', function (test) {
+  Meteor.storage.empty();
+  var one = [1, 'one'];
+  var two = {two: 2};
+  var three = [{three: ['one', 'two', {'three': 3}]}];
+  var setResOne = Meteor.storage.set('teststorageOne', one);
+  var setResTwo = Meteor.storage.set('teststorageTwo', two);
+  var setResThree = Meteor.storage.set('teststorageThree', three);
+
+  test.isTrue(setResOne);
+  test.isTrue(setResTwo);
+  test.isTrue(setResThree);
+  
+  test.equal(Meteor.storage.get('teststorageOne'), one);
+  test.equal(Meteor.storage.get('teststorageTwo'), two);
+  test.equal(Meteor.storage.get('teststorageThree'), three);
+
+  Meteor.storage.empty();
+});
+
 Tinytest.add('Meteor.storage: remove() non existent value', function (test) {
   Meteor.storage.empty();
   var removeRes = Meteor.storage.remove('1234567890asdfghjk');

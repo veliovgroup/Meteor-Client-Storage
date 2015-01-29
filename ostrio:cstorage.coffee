@@ -107,7 +107,7 @@ Meteor.storage =
   ###
   prepare: (value) ->
     type = typeof value
-    if type is 'function' || type is 'object' and !!obj
+    if type is 'function' || type is 'object' and !!value
       JSON.stringify value
     else
       try
