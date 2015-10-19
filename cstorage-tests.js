@@ -1,67 +1,67 @@
-Tinytest.add('Meteor.storage: set() / get()', function (test) {
-  Meteor.storage.empty();
+Tinytest.add('ClientStorage - set() / get()', function (test) {
+  ClientStorage.empty();
   var testVal = 'this is test value';
-  var setRes = Meteor.storage.set('teststorage', testVal);
+  var setRes = ClientStorage.set('teststorage', testVal);
   test.isTrue(setRes);
-  test.equal(Meteor.storage.get('teststorage'), testVal);
-  Meteor.storage.empty();
+  test.equal(ClientStorage.get('teststorage'), testVal);
+  ClientStorage.empty();
 });
 
-Tinytest.add('Meteor.storage: set() / get() object and array', function (test) {
-  Meteor.storage.empty();
+Tinytest.add('ClientStorage - set() / get() object and array', function (test) {
+  ClientStorage.empty();
   var one = [1, 'one'];
   var two = {two: 2};
   var three = [{three: ['one', 'two', {'three': 3}]}];
-  var setResOne = Meteor.storage.set('teststorageOne', one);
-  var setResTwo = Meteor.storage.set('teststorageTwo', two);
-  var setResThree = Meteor.storage.set('teststorageThree', three);
+  var setResOne = ClientStorage.set('teststorageOne', one);
+  var setResTwo = ClientStorage.set('teststorageTwo', two);
+  var setResThree = ClientStorage.set('teststorageThree', three);
 
   test.isTrue(setResOne);
   test.isTrue(setResTwo);
   test.isTrue(setResThree);
   
-  test.equal(Meteor.storage.get('teststorageOne'), one);
-  test.equal(Meteor.storage.get('teststorageTwo'), two);
-  test.equal(Meteor.storage.get('teststorageThree'), three);
+  test.equal(ClientStorage.get('teststorageOne'), one);
+  test.equal(ClientStorage.get('teststorageTwo'), two);
+  test.equal(ClientStorage.get('teststorageThree'), three);
 
-  Meteor.storage.empty();
+  ClientStorage.empty();
 });
 
-Tinytest.add('Meteor.storage: remove() non existent value', function (test) {
-  Meteor.storage.empty();
-  var removeRes = Meteor.storage.remove('1234567890asdfghjk');
+Tinytest.add('ClientStorage - remove() non existent value', function (test) {
+  ClientStorage.empty();
+  var removeRes = ClientStorage.remove('1234567890asdfghjk');
   test.isFalse(removeRes);
-  Meteor.storage.empty();
+  ClientStorage.empty();
 });
 
-Tinytest.add('Meteor.storage: empty()', function (test) {
-  Meteor.storage.empty();
-  var setResOne = Meteor.storage.set('teststorageOne', 'One');
-  var setResTwo = Meteor.storage.set('teststorageTwo', 'Two');
-  var removeRes = Meteor.storage.empty();
+Tinytest.add('ClientStorage - empty()', function (test) {
+  ClientStorage.empty();
+  var setResOne = ClientStorage.set('teststorageOne', 'One');
+  var setResTwo = ClientStorage.set('teststorageTwo', 'Two');
+  var removeRes = ClientStorage.empty();
 
   test.isTrue(removeRes);
-  test.equal(Meteor.storage.keys(), []);
+  test.equal(ClientStorage.keys(), []);
 
-  removeRes = Meteor.storage.empty();
+  removeRes = ClientStorage.empty();
   test.isFalse(removeRes);
 });
 
-Tinytest.add('Meteor.storage: keys() / has() / remove()', function (test) {
-  Meteor.storage.empty();
-  var setResOne = Meteor.storage.set('teststorageOne', 'One');
-  var setResTwo = Meteor.storage.set('teststorageTwo', 'Two');
+Tinytest.add('ClientStorage - keys() / has() / remove()', function (test) {
+  ClientStorage.empty();
+  var setResOne = ClientStorage.set('teststorageOne', 'One');
+  var setResTwo = ClientStorage.set('teststorageTwo', 'Two');
 
-  test.isTrue(Meteor.storage.keys().inArray('teststorageOne'));
-  test.isTrue(Meteor.storage.keys().inArray('teststorageTwo'));
+  test.isTrue(!!~ClientStorage.keys().indexOf('teststorageOne'));
+  test.isTrue(!!~ClientStorage.keys().indexOf('teststorageTwo'));
 
-  test.isTrue(Meteor.storage.has('teststorageOne'));
-  test.isTrue(Meteor.storage.has('teststorageTwo'));
+  test.isTrue(ClientStorage.has('teststorageOne'));
+  test.isTrue(ClientStorage.has('teststorageTwo'));
 
-  var removeRes = Meteor.storage.remove('teststorageOne');
+  var removeRes = ClientStorage.remove('teststorageOne');
   test.isTrue(removeRes);
 
-  test.isFalse(Meteor.storage.has('teststorageOne'));
-  test.isTrue(Meteor.storage.has('teststorageTwo'));
-  Meteor.storage.empty();
+  test.isFalse(ClientStorage.has('teststorageOne'));
+  test.isTrue(ClientStorage.has('teststorageTwo'));
+  ClientStorage.empty();
 });
