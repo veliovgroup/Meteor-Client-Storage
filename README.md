@@ -1,7 +1,7 @@
 Client storage for Meteor
 ========
 
- - Boilerplate Client storage functions, localStorage with fall-back to Cookies
+ - Bulletproof Client storage functions, localStorage with fall-back to Cookies
  - Non-reactive, doesn't share between tabs - __cstorage__ package is just simple and efficient Client storage tool
  - __100%__ tests coverage
 
