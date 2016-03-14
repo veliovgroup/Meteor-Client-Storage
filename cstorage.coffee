@@ -3,8 +3,24 @@
 @description Implement boilerplate Client storage functions, localStorage with fall-back to Cookies
 ###
 class clientStorage
-  constructor: () ->
-    @cookies = new Cookies runOnServer: false
+  constructor: (driver = null) ->
+    @cookies   = new Cookies runOnServer: false
+    @LSSupport = @_localStorageSupport()
+    if driver is null
+      if @LSSupport
+        @ls = window.localStorage or localStorage
+      else
+        @ls = null
+    else if driver is 'localStorage'
+      if @LSSupport
+        @ls = window.localStorage or localStorage
+      else
+        console.warn 'ClientStorage is set to "localStorage", but it is not supported on this browser'
+    else if driver is 'cookies'
+      @LSSupport = false
+      @ls = null
+    else
+      console.warn 'Wrong ClientStorage driver!'
   
   ###
   @function
@@ -15,11 +31,10 @@ class clientStorage
   @returns {mixed}
   ###
   get: (key) ->
-    if @_localStorageSupport()
-      @_prepare Meteor._localStorage.getItem(key)
+    if @LSSupport
+      @_prepare @ls.getItem(key)
     else
       @_prepare @cookies.get(key)
-
   
   ###
   @function
@@ -31,8 +46,8 @@ class clientStorage
   @return {Boolean}
   ###
   set: (key, value) ->
-    if @_localStorageSupport()
-      Meteor._localStorage.setItem key, @_prepare(value)
+    if @LSSupport
+      @ls.setItem key, @_prepare(value)
     else
       @cookies.set key, @_prepare(value), null, null, false, null
     true
@@ -47,15 +62,14 @@ class clientStorage
   ###
   remove: (key) ->
     if key and @has(key)
-      if @_localStorageSupport()
-        Meteor._localStorage.removeItem key
+      if @LSSupport
+        @ls.removeItem key
         true
       else
         @cookies.remove key, null, window.location.host
     else
       false
-
-
+  
   ###
   @function
   @namespace clientStorage
@@ -65,11 +79,11 @@ class clientStorage
   @returns {Boolean}
   ###
   has: (key) ->
-    if @_localStorageSupport()
-      !!Meteor._localStorage.getItem key
+    if @LSSupport
+      !!@ls.getItem key
     else
       @cookies.has key
-
+  
   ###
   @function
   @namespace clientStorage
@@ -78,13 +92,13 @@ class clientStorage
   @returns {[String]]}
   ###
   keys: ->
-    if @_localStorageSupport()
-      i = localStorage.length
+    if @LSSupport
+      i = @ls.length
       while i--
-        localStorage.key i
+        @ls.key i
     else
         @cookies.keys()
-
+  
   ###
   @function
   @namespace clientStorage
@@ -93,13 +107,13 @@ class clientStorage
   @returns {Boolean}
   ###
   empty: ->
-    if @_localStorageSupport() and localStorage.length > 0
+    if @LSSupport and @ls.length > 0
       @keys().forEach (key) => @remove key
       true
     else
       @cookies.remove()
   
-  ###*
+  ###
   @function
   @namespace clientStorage
   @name _prepare
@@ -108,22 +122,22 @@ class clientStorage
   ###
   _prepare: (value) ->
     type = typeof value
-    if type is 'function' || type is 'object' and !!value
+    if type is 'function' or type is 'object' and !!value
       JSON.stringify value
     else
       try
         JSON.parse(value)
       catch error
         value
-
-  ###*
+  
+  ###
   @function
   @namespace clientStorage
   @name localstorage
   @description Test browser for localStorage support
   @return {Boolean}
   ###
-  _localStorageSupport: ->
+  _localStorageSupport: =>
     try
       "localStorage" of window and window.localStorage isnt null
     catch

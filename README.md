@@ -31,6 +31,21 @@ Usage:
 #### Empty
  - `ClientStorage.empty()` - Empty storage (remove all key/value pairs). __Use with caution! (*May remove cookies which was set not by you*)__
 
+#### Use `cookies` only
+To use `cookies` as a driver for `ClientStorage` create new instance of `clientStorage` (*camel-case, first letter __lower-case__*)
+```js
+var csCookies = new clientStorage('cookies');
+```
+
+#### Use `localStorage` only
+To use `localStorage` as a driver for `ClientStorage` create new instance of `clientStorage` (*camel-case, first letter __lower-case__*)
+```js
+var csCookies = new clientStorage('localStorage');
+```
+
+__Note:__ *All instances shares same cookies and localStorage records!*
+
+
 
 Example:
 =========
