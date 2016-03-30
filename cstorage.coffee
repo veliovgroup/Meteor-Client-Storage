@@ -139,7 +139,13 @@ class clientStorage
   ###
   _localStorageSupport: =>
     try
-      "localStorage" of window and window.localStorage isnt null
+      support = "localStorage" of window and window.localStorage isnt null
+      if support
+        window.localStorage.setItem '___test___', 'test'
+        window.localStorage.removeItem '___test___'
+        return true
+      else
+        return false
     catch
       false
 

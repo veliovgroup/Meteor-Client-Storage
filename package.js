@@ -1,6 +1,6 @@
 Package.describe({
   name: 'ostrio:cstorage',
-  version: '2.0.3',
+  version: '2.0.4',
   summary: 'Bulletproof Client storage functions, localStorage with fall-back to Cookies',
   git: 'https://github.com/VeliovGroup/Meteor-Client-Storage',
   documentation: 'README.md'
