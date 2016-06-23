@@ -1,14 +1,14 @@
 Package.describe({
   name: 'ostrio:cstorage',
-  version: '2.0.4',
-  summary: 'Bulletproof Client storage functions, localStorage with fall-back to Cookies',
+  version: '2.0.5',
+  summary: 'Bulletproof persistent Client storage, works with disabled Cookies and/or localStorage',
   git: 'https://github.com/VeliovGroup/Meteor-Client-Storage',
   documentation: 'README.md'
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0');
-  api.use(['coffeescript', 'localstorage', 'ostrio:cookies@2.0.2'], 'client');
+  api.use(['coffeescript', 'localstorage', 'ostrio:cookies@2.0.4'], 'client');
   api.addFiles('cstorage.coffee', 'client');
   api.export('ClientStorage', 'client');
   api.export('clientStorage', 'client');

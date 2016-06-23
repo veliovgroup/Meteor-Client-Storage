@@ -27,6 +27,30 @@ Tinytest.add('ClientStorage - set() / get() object and array', function (test) {
   ClientStorage.empty();
 });
 
+Tinytest.add('ClientStorage - set() / get() / has() FALSE', function (test) {
+  var testVal = false;
+  var setRes = ClientStorage.set('testFalse', testVal);
+  test.isTrue(setRes);
+  test.isTrue(ClientStorage.has('testFalse'));
+  test.equal(ClientStorage.get('testFalse'), testVal);
+});
+
+Tinytest.add('ClientStorage - set() / get() / has() TRUE', function (test) {
+  var testVal = true;
+  var setRes = ClientStorage.set('testTrue', testVal);
+  test.isTrue(setRes);
+  test.isTrue(ClientStorage.has('testTrue'));
+  test.equal(ClientStorage.get('testTrue'), testVal);
+});
+
+Tinytest.add('ClientStorage - set() / get() / has() NULL', function (test) {
+  var testVal = null;
+  var setRes = ClientStorage.set('testNull', testVal);
+  test.isTrue(setRes);
+  test.isTrue(ClientStorage.has('testNull'));
+  test.equal(ClientStorage.get('testNull'), testVal);
+});
+
 Tinytest.add('ClientStorage - remove() non existent value', function (test) {
   ClientStorage.empty();
   var removeRes = ClientStorage.remove('1234567890asdfghjk');
@@ -77,6 +101,30 @@ Tinytest.add('ClientStorageCookies - set() / get()', function (test) {
   test.isTrue(setRes);
   test.equal(ClientStorageCookies.get('teststorage'), testVal);
   ClientStorageCookies.empty();
+});
+
+Tinytest.add('ClientStorageCookies - set() / get() / has() FALSE', function (test) {
+  var testVal = false;
+  var setRes = ClientStorageCookies.set('testFalse', testVal);
+  test.isTrue(setRes);
+  test.isTrue(ClientStorageCookies.has('testFalse'));
+  test.equal(ClientStorageCookies.get('testFalse'), testVal);
+});
+
+Tinytest.add('ClientStorageCookies - set() / get() / has() TRUE', function (test) {
+  var testVal = true;
+  var setRes = ClientStorageCookies.set('testTrue', testVal);
+  test.isTrue(setRes);
+  test.isTrue(ClientStorageCookies.has('testTrue'));
+  test.equal(ClientStorageCookies.get('testTrue'), testVal);
+});
+
+Tinytest.add('ClientStorageCookies - set() / get() / has() NULL', function (test) {
+  var testVal = null;
+  var setRes = ClientStorageCookies.set('testNull', testVal);
+  test.isTrue(setRes);
+  test.isTrue(ClientStorageCookies.has('testNull'));
+  test.equal(ClientStorageCookies.get('testNull'), testVal);
 });
 
 Tinytest.add('ClientStorageCookies - set() / get() object and array', function (test) {
@@ -149,6 +197,30 @@ Tinytest.add('ClientStorageLS - set() / get()', function (test) {
   test.isTrue(setRes);
   test.equal(ClientStorageLS.get('teststorage'), testVal);
   ClientStorageLS.empty();
+});
+
+Tinytest.add('ClientStorageLS - set() / get() / has() FALSE', function (test) {
+  var testVal = false;
+  var setRes = ClientStorageLS.set('testFalse', testVal);
+  test.isTrue(setRes);
+  test.isTrue(ClientStorageLS.has('testFalse'));
+  test.equal(ClientStorageLS.get('testFalse'), testVal);
+});
+
+Tinytest.add('ClientStorageLS - set() / get() / has() TRUE', function (test) {
+  var testVal = true;
+  var setRes = ClientStorageLS.set('testTrue', testVal);
+  test.isTrue(setRes);
+  test.isTrue(ClientStorageLS.has('testTrue'));
+  test.equal(ClientStorageLS.get('testTrue'), testVal);
+});
+
+Tinytest.add('ClientStorageLS - set() / get() / has() NULL', function (test) {
+  var testVal = null;
+  var setRes = ClientStorageLS.set('testNull', testVal);
+  test.isTrue(setRes);
+  test.isTrue(ClientStorageLS.has('testNull'));
+  test.equal(ClientStorageLS.get('testNull'), testVal);
 });
 
 Tinytest.add('ClientStorageLS - set() / get() object and array', function (test) {

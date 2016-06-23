@@ -1,1 +1,3 @@
-See full change-log at [releases on GitHub](https://github.com/VeliovGroup/Meteor-Client-Storage/releases)
+Changelog
+======
+For full changelog see [releases on GitHub](https://github.com/VeliovGroup/Meteor-Client-Storage/releases)
