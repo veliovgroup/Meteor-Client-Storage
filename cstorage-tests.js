@@ -1,3 +1,6 @@
+import { ClientStorage } from 'meteor/ostrio:cstorage';
+import { clientStorage } from 'meteor/ostrio:cstorage';
+
 Tinytest.add('ClientStorage - set() / get()', function (test) {
   ClientStorage.empty();
   var testVal = 'this is test value';

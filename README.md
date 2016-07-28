@@ -11,6 +11,13 @@ Install:
 meteor add ostrio:cstorage
 ```
 
+ES6 Import:
+========
+```jsx
+import { ClientStorage } from 'meteor/ostrio:cstorage';
+```
+
+
 Usage:
 ========
 #### Get
@@ -38,9 +45,14 @@ var csCookies = new clientStorage('cookies');
 ```
 
 #### Use `localStorage` only
-To use `localStorage` as a driver for `ClientStorage` create new instance of `clientStorage` (*camel-case, first letter __lower-case__*)
+To use `localStorage` as a driver for `ClientStorage` create new instance of `clientStorage` (*camel-case, first letter __lower-case__*):
 ```js
 var csLocalStorage = new clientStorage('localStorage');
+```
+or in ES6:
+```jsx
+import { clientStorage } from 'meteor/ostrio:cstorage';
+let csLocalStorage = new clientStorage('localStorage');
 ```
 
 __Note:__ *All instances shares same cookies and localStorage records!*

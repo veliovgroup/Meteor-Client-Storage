@@ -174,3 +174,9 @@ class clientStorage
       false
 
 ClientStorage = new clientStorage()
+
+###
+Export the ClientStorage class
+###
+`export { ClientStorage }`
+`export { clientStorage }`
